@@ -1,0 +1,38 @@
+package com.expensetracker.releasev1.services;
+
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.expensetracker.releasev1.models.User;
+import com.expensetracker.releasev1.repositories.UserRepository;
+
+@Service
+public class UserService {
+	@Autowired
+	private final UserRepository userRepo;
+	
+	public UserService(UserRepository userRepo){
+		this.userRepo = userRepo;
+	}
+	
+	public User addUser(User user) {
+		user.setId(UUID.randomUUID().getMostSignificantBits());
+		return userRepo.save(user);
+	}
+	
+	public List<User> findAllUsers(){
+		return userRepo.findAll();
+	}
+	
+	public User updateUser(User user){
+		return userRepo.save(user);
+	}
+	
+	public void deleteUser(Long id) {
+		userRepo.deleteUserById(id);
+	}
+	
+}
