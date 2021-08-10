@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.expensetracker.releasev1.exception.UserNotFoundException;
 import com.expensetracker.releasev1.models.User;
 import com.expensetracker.releasev1.repositories.UserRepository;
 
@@ -29,6 +30,10 @@ public class UserService {
 	
 	public User updateUser(User user){
 		return userRepo.save(user);
+	}
+	
+	public User findUserById(Long id){
+		return userRepo.findUserById(id).orElseThrow(() -> new UserNotFoundException("User by ID" + id +"not Found"));
 	}
 	
 	public void deleteUser(Long id) {
