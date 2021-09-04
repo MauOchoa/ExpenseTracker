@@ -13,11 +13,7 @@ import com.expensetracker.releasev1.repositories.UserRepository;
 @Service
 public class UserService {
 	@Autowired
-	private final UserRepository userRepo;
-	
-	public UserService(UserRepository userRepo){
-		this.userRepo = userRepo;
-	}
+	UserRepository userRepo;
 	
 	public User addUser(User user) {
 		user.setId(UUID.randomUUID().getMostSignificantBits());
